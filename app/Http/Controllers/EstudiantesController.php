@@ -21,14 +21,14 @@ class EstudiantesController extends Controller
     
     public function getEstudiantes()
     {
-        $data = Estudiantes::select('estudiantes.*','tipodocumento.codigo as codTipoDocumento','tipodocumento.nombre as nomTipoDocumento','paises.codigo as codPais','paises.nombre as nomPais','departamentos.codigo as codDepartamento','departamentos.nombre as nomDepartamento','ciudades.codigo as codCiudad','ciudades.nombre as nomCiudad')
+        $data = Estudiantes::select('estudiantes.*')
                                 ->join('tipodocumento','estudiantes.idPais','=','tipodocumento.id')                        
                                 ->join('paises','estudiantes.idPais','=','paises.id')
                                 ->join('departamentos','estudiantes.idDepartamento','=','departamentos.id')
                                 ->join('ciudades','estudiantes.idCiudad','=','ciudades.id')
                                 ->get();
 
-        $estudiantes = $this->armarRespuesta($data);
+        $estudiantes = $data; //$this->armarRespuesta($data);
 
         return response()->json([
             'success' => 'true',
@@ -115,15 +115,33 @@ class EstudiantesController extends Controller
     //get
     public function getEstudiante($id)
     {
-        $data = Estudiantes::select('estudiantes.*','tipodocumento.codigo as codTipoDocumento','tipodocumento.nombre as nomTipoDocumento','paises.codigo as codPais','paises.nombre as nomPais','departamentos.codigo as codDepartamento','departamentos.nombre as nomDepartamento','ciudades.codigo as codCiudad','ciudades.nombre as nomCiudad')
+        $data = Estudiantes::select('estudiantes.*')
                                 ->join('tipodocumento','estudiantes.idPais','=','tipodocumento.id')                        
                                 ->join('paises','estudiantes.idPais','=','paises.id')
                                 ->join('departamentos','estudiantes.idDepartamento','=','departamentos.id')
                                 ->join('ciudades','estudiantes.idCiudad','=','ciudades.id')
                                 ->where('estudiantes.id','=',$id)
-                                ->get();
+                                ->first();
 
-        $estudiante = $this->armarRespuesta($data);
+        $estudiante = $data; //$this->armarRespuesta($data);
+
+        return response()->json([
+            'success' => 'true',
+            'data' => $estudiante
+        ],200);
+    }
+
+    public function getEstudianteByDocumento($documento)
+    {
+        $data = Estudiantes::select('estudiantes.*','tipodocumento.codigo as codTipoDocumento','tipodocumento.nombre as nomTipoDocumento','paises.codigo as codPais','paises.nombre as nomPais','departamentos.codigo as codDepartamento','departamentos.nombre as nomDepartamento','ciudades.codigo as codCiudad','ciudades.nombre as nomCiudad')
+                                ->join('tipodocumento','estudiantes.idPais','=','tipodocumento.id')                        
+                                ->join('paises','estudiantes.idPais','=','paises.id')
+                                ->join('departamentos','estudiantes.idDepartamento','=','departamentos.id')
+                                ->join('ciudades','estudiantes.idCiudad','=','ciudades.id')
+                                ->where('estudiantes.documento','=',$documento)
+                                ->first();
+
+        $estudiante = $data;//$this->armarRespuesta($data);
 
         return response()->json([
             'success' => 'true',
@@ -216,7 +234,7 @@ class EstudiantesController extends Controller
             ],400);
         }
 
-        $pais->delete();
+        $estudiante->delete();
 
         return response()->json([
             'success' => 'true',
@@ -262,8 +280,8 @@ class EstudiantesController extends Controller
                 'apellido2' => $row->apellido2,
                 'barrio' => $row->barrio,
                 'direccion' => $row->direccion,
-                'telefono_casa' => $row->telefono_casa,
-                'telefono_oficina' => $row->telefono_oficina,
+                'telefonoCasa' => $row->telefono_casa,
+                'telefonoOficina' => $row->telefono_oficina,
                 'celular' => $row->celular,
                 'email' => $row->email,
                 'fechaNacimiento' => $row->fecha_nacimiento,

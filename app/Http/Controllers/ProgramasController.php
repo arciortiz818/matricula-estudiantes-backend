@@ -90,7 +90,7 @@ class ProgramasController extends Controller
             ],400);
         }
 
-        //$programa->codigo = request('codigo');
+        $programa->codigo = request('codigo');
         $programa->nombre = request('nombre');
         $programa->valor_nivel = request('valor_nivel');
         $programa->numero_niveles = request('numero_niveles');

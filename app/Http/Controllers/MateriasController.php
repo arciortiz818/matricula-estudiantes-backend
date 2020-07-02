@@ -21,7 +21,7 @@ class MateriasController extends Controller
                             ->join('programas','materias.idPrograma','=','programas.id')
                             ->get();
 
-        $materias = $this->armarRespuesta($data);
+        $materias = $data; //$this->armarRespuesta($data);
         
 
         return response()->json([
@@ -37,7 +37,7 @@ class MateriasController extends Controller
                             ->where('materias.idPrograma','=',$idPrograma)
                             ->get();
 
-        $materias = $this->armarRespuesta($data);
+        $materias = $data; //$this->armarRespuesta($data);
         
 
         return response()->json([
@@ -96,9 +96,9 @@ class MateriasController extends Controller
         $data = Materias::select('materias.*','programas.codigo as codPrograma','programas.nombre as nomPrograma')
                             ->join('programas','materias.idPrograma','=','programas.id')
                             ->where('materias.id','=',$id)
-                            ->get();
+                            ->first();
 
-        $materia = $this->armarRespuesta($data);
+        $materia = $data; //$this->armarRespuesta($data);
 
         return response()->json([
             'success' => 'true',

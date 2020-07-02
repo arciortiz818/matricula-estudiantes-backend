@@ -66,6 +66,7 @@ Route::group(['middleware' => [], 'prefix' => 'admin/estudiantes'], function(){
     Route::get('','EstudiantesController@getEstudiantes');
     Route::post('','EstudiantesController@addEstudiante');
     Route::get('{id}','EstudiantesController@getEstudiante');
+    Route::get('documento/{documento}','EstudiantesController@getEstudianteByDocumento');
     Route::put('{id}','EstudiantesController@updateEstudiante');
     Route::delete('{id}','EstudiantesController@deleteEstudiante');
 });
