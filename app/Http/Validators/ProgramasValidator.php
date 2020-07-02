@@ -13,6 +13,7 @@ class ProgramasValidator
         $this->rules = [
             'codigo' => 'required',
             'nombre' => 'required',
+            'plan' => 'required',
             'valor_semestre' => 'numeric',
             'numero_semestres' => 'numeric'
         ];

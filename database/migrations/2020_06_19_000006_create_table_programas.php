@@ -17,6 +17,7 @@ class CreateTableProgramas extends Migration
             $table->id();
             $table->string('codigo',20);
             $table->string('nombre',60);
+            $table->string('plan',50);
             $table->double('valor_nivel',18,2);
             $table->integer('numero_niveles');
         });

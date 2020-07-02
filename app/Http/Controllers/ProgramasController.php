@@ -44,6 +44,7 @@ class ProgramasController extends Controller
         $programa = new Programas();
         $programa->codigo = request('codigo');
         $programa->nombre = request('nombre');
+        $programa->plan = request('plan');
         $programa->valor_nivel = request('valor_nivel');
         $programa->numero_niveles = request('numero_niveles');
         $programa->save();
@@ -92,6 +93,7 @@ class ProgramasController extends Controller
 
         $programa->codigo = request('codigo');
         $programa->nombre = request('nombre');
+        $programa->plan = request('plan');
         $programa->valor_nivel = request('valor_nivel');
         $programa->numero_niveles = request('numero_niveles');
         $programa->update();
@@ -121,4 +123,6 @@ class ProgramasController extends Controller
             'message' => 'Registro eliminado con éxito.'
         ],200);
     }
+
+  
 }
