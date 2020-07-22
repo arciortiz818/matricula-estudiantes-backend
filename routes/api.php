@@ -82,8 +82,15 @@ Route::group(['middleware' => ['jwt.verify'], 'prefix' => 'admin/programas'], fu
 Route::group(['middleware' => [], 'prefix' => 'admin/materias'], function(){
     Route::get('','MateriasController@getMaterias');
     Route::get('programa/{idPrograma}','MateriasController@getMateriasxPrograma');
+    Route::get('programa-semestre/{idPrograma}','MateriasController@getMateriasxProgramaSemestre');
     Route::post('','MateriasController@addMateria');
     Route::get('{id}','MateriasController@getMateria');
     Route::put('{id}','MateriasController@updateMateria');
     Route::delete('{id}','MateriasController@deleteMateria');
+});
+
+Route::group(['middleware' => [], 'prefix' => 'admin/matriculas'], function(){
+    Route::get('{docEstudiante}','MatriculasController@getMatriculaByDocEstudiante');
+    Route::post('','MatriculasController@addMatricula');
+    Route::put('{idMatricula}','MatriculasController@editMatricula');
 });

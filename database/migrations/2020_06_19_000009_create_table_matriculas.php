@@ -17,6 +17,7 @@ class CreateTableMatriculas extends Migration
             $table->id();
             $table->date('fecha_matricula');
             $table->date('fecha_limite');
+            $table->string('periodo',8);  //202002 - 202001
             $table->double('valor_matricula',18,2);
             $table->double('valor_descuento',18,2);
             $table->tinyInteger('pagado');

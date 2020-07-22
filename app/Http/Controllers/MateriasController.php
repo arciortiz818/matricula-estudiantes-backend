@@ -37,8 +37,49 @@ class MateriasController extends Controller
                             ->where('materias.idPrograma','=',$idPrograma)
                             ->get();
 
-        $materias = $data; //$this->armarRespuesta($data);
+        $materias = $data;
+
+        return response()->json([
+            'success' => 'true',
+            'data' => $materias
+        ],200);
+    }
+
+    public function getMateriasxProgramaSemestre($idPrograma)
+    {
+        $data = Materias::select('materias.*','programas.codigo as codPrograma','programas.nombre as nomPrograma')
+                            ->join('programas','materias.idPrograma','=','programas.id')
+                            ->where('materias.idPrograma','=',$idPrograma)
+                            ->get();
+
         
+        $programa = Programas::find((int)$idPrograma);
+
+        
+
+        if($programa->niveles = 0){
+            //error
+        }
+
+        $materias = [];
+
+        for ($i=1; $i <= $programa->numero_niveles; $i++) { 
+            $tmp = [];
+            foreach($data as $materia){
+                
+                if($materia->nivel == $i){
+                    array_push($tmp,$materia);
+                }
+            }
+            if(count($tmp) > 0){
+                array_push($materias,[
+                    'semestre' => $i,
+                    'materiasNivel' => $tmp
+                ]);
+            }
+            
+            
+        }
 
         return response()->json([
             'success' => 'true',

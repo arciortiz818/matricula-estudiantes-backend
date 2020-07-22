@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Validators\CiudadesValidator;
 use App\Ciudades;
-use App\Departamentos;
 
 class CiudadesController extends Controller
 {
